@@ -1,0 +1,9 @@
+[Unit]
+Description=Blackbox Exporter
+
+[Service]
+EnvironmentFile=/etc/default/blackbox_exporter
+ExecStart=/usr/bin/blackbox_exporter $OPTIONS
+
+[Install]
+WantedBy=multi-user.target
