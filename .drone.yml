@@ -1,10 +1,16 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
 clone:
-  git:
-    image: plugins/git
-    volumes:
-      - /var/repos/${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}:/drone/src/github.com/${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
-pipeline:
-  package:
+  depth: 1
+
+steps:
+  - name: package
     image: ubuntu:18.04
     commands:
       - apt-get update
@@ -19,11 +25,13 @@ pipeline:
       - ./builder
       - ls
       - rm -f *.deb
-    volumes:
-      - /var/repos/${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}:/drone/src/github.com/${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
-    secrets:
-      - DEBIAN_REPO_GPG_KEY
-      - DEBIAN_S3_ACCESS_KEY
-      - DEBIAN_S3_SECRET_KEY
+    environment:
+      DEBIAN_REPO_GPG_KEY:
+        from_secret: DEBIAN_REPO_GPG_KEY
+      DEBIAN_S3_ACCESS_KEY:
+        from_secret: DEBIAN_S3_ACCESS_KEY
+      DEBIAN_S3_SECRET_KEY:
+        from_secret: DEBIAN_S3_SECRET_KEY
     when:
-      event: push
+      event:
+        - push
