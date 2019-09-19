@@ -1,6 +1,6 @@
 VERSION=0.14.0
 DEB_VERSION=1
-PACKAGE_NAME=backbox-exporter
+PACKAGE_NAME=blackbox-exporter
 PROGRAM_NAME=blackbox_exporter
 UPSTREAM_NAME=blackbox_exporter
 EXTRA_INSTALL_DIRS=""
