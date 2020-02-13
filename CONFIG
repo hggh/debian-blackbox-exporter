@@ -1,4 +1,4 @@
-VERSION=0.14.0
+VERSION=0.16.0
 DEB_VERSION=1
 PACKAGE_NAME=blackbox-exporter
 PROGRAM_NAME=blackbox_exporter
